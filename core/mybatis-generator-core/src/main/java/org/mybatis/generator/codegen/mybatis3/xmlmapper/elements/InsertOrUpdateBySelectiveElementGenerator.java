@@ -137,9 +137,9 @@ public class InsertOrUpdateBySelectiveElementGenerator extends
         valuesTrimElement.addAttribute(new Attribute("suffixOverrides", ","));
         answer.addElement(valuesTrimElement);
         // update
-        String keyColumnName = introspectedTable.getGeneratedKey().getColumn();
+        String keyColumnName = introspectedTable.getGeneratedKey() == null ? null : introspectedTable.getGeneratedKey().getColumn();
         for (IntrospectedColumn introspectedColumn : ListUtilities.removeGeneratedAlwaysColumns(introspectedTable
-                .getAllColumns())) {
+                .getNonPrimaryKeyColumns())) {
             String currentColumn = MyBatis3FormattingUtilities
                     .getAliasedEscapedColumnName(introspectedColumn);
             if (keyColumnName != null && keyColumnName.equalsIgnoreCase(currentColumn)) {

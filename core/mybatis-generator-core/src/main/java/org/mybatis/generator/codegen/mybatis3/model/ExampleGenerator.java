@@ -27,14 +27,7 @@ import org.mybatis.generator.api.CommentGenerator;
 import org.mybatis.generator.api.FullyQualifiedTable;
 import org.mybatis.generator.api.IntrospectedColumn;
 import org.mybatis.generator.api.dom.OutputUtilities;
-import org.mybatis.generator.api.dom.java.CompilationUnit;
-import org.mybatis.generator.api.dom.java.Field;
-import org.mybatis.generator.api.dom.java.FullyQualifiedJavaType;
-import org.mybatis.generator.api.dom.java.InnerClass;
-import org.mybatis.generator.api.dom.java.JavaVisibility;
-import org.mybatis.generator.api.dom.java.Method;
-import org.mybatis.generator.api.dom.java.Parameter;
-import org.mybatis.generator.api.dom.java.TopLevelClass;
+import org.mybatis.generator.api.dom.java.*;
 import org.mybatis.generator.codegen.AbstractJavaGenerator;
 import org.mybatis.generator.codegen.mybatis3.MyBatis3FormattingUtilities;
 
@@ -101,7 +94,8 @@ public class ExampleGenerator extends AbstractJavaGenerator {
         // add field, getter, setter for limit
         field = new Field();
         field.setVisibility(JavaVisibility.PROTECTED);
-        field.setType(FullyQualifiedJavaType.getIntInstance());
+//        field.setType(FullyQualifiedJavaType.getIntInstance());
+        field.setType(PrimitiveTypeWrapper.getIntegerInstance());
         field.setName("limit"); //$NON-NLS-1$
         commentGenerator.addFieldComment(field, introspectedTable);
         topLevelClass.addField(field);
@@ -109,15 +103,14 @@ public class ExampleGenerator extends AbstractJavaGenerator {
         method = new Method();
         method.setVisibility(JavaVisibility.PUBLIC);
         method.setName("setLimit"); //$NON-NLS-1$
-        method.addParameter(new Parameter(FullyQualifiedJavaType
-                .getIntInstance(), "limit")); //$NON-NLS-1$
+        method.addParameter(new Parameter(PrimitiveTypeWrapper.getIntegerInstance(), "limit")); //$NON-NLS-1$
         method.addBodyLine("this.limit = limit;"); //$NON-NLS-1$
         commentGenerator.addGeneralMethodComment(method, introspectedTable);
         topLevelClass.addMethod(method);
 
         method = new Method();
         method.setVisibility(JavaVisibility.PUBLIC);
-        method.setReturnType(FullyQualifiedJavaType.getIntInstance());
+        method.setReturnType(PrimitiveTypeWrapper.getIntegerInstance());
         method.setName("getLimit"); //$NON-NLS-1$
         method.addBodyLine("return limit;"); //$NON-NLS-1$
         commentGenerator.addGeneralMethodComment(method, introspectedTable);
@@ -127,7 +120,7 @@ public class ExampleGenerator extends AbstractJavaGenerator {
         // add field, getter, setter for offset
         field = new Field();
         field.setVisibility(JavaVisibility.PROTECTED);
-        field.setType(FullyQualifiedJavaType.getIntInstance());
+        field.setType(PrimitiveTypeWrapper.getIntegerInstance());
         field.setName("offset"); //$NON-NLS-1$
         commentGenerator.addFieldComment(field, introspectedTable);
         topLevelClass.addField(field);
@@ -135,15 +128,14 @@ public class ExampleGenerator extends AbstractJavaGenerator {
         method = new Method();
         method.setVisibility(JavaVisibility.PUBLIC);
         method.setName("setOffset"); //$NON-NLS-1$
-        method.addParameter(new Parameter(FullyQualifiedJavaType
-                .getIntInstance(), "offset")); //$NON-NLS-1$
+        method.addParameter(new Parameter(PrimitiveTypeWrapper.getIntegerInstance(), "offset")); //$NON-NLS-1$
         method.addBodyLine("this.offset = offset;"); //$NON-NLS-1$
         commentGenerator.addGeneralMethodComment(method, introspectedTable);
         topLevelClass.addMethod(method);
 
         method = new Method();
         method.setVisibility(JavaVisibility.PUBLIC);
-        method.setReturnType(FullyQualifiedJavaType.getIntInstance());
+        method.setReturnType(PrimitiveTypeWrapper.getIntegerInstance());
         method.setName("getOffset"); //$NON-NLS-1$
         method.addBodyLine("return offset;"); //$NON-NLS-1$
         commentGenerator.addGeneralMethodComment(method, introspectedTable);

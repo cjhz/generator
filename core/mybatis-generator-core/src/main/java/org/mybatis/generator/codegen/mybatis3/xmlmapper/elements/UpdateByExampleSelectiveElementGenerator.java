@@ -54,8 +54,7 @@ public class UpdateByExampleSelectiveElementGenerator extends
         XmlElement dynamicElement = new XmlElement("set"); //$NON-NLS-1$
         answer.addElement(dynamicElement);
 
-        for (IntrospectedColumn introspectedColumn : ListUtilities.removeGeneratedAlwaysColumns(introspectedTable
-                .getAllColumns())) {
+        for (IntrospectedColumn introspectedColumn : ListUtilities.removeGeneratedAlwaysColumns(introspectedTable.getNonPrimaryKeyColumns())) {
             sb.setLength(0);
             sb.append(introspectedColumn.getJavaProperty("record.")); //$NON-NLS-1$
             sb.append(" != null"); //$NON-NLS-1$
