@@ -28,7 +28,7 @@
 
 <generatorConfiguration>
     <classPathEntry
-            location="/Users/yh-treefinance/MyApp/Github/mybatis-generator/core/mybatis-generator-core/target/test-classes/driver/mysql-connector-java-5.1.41.jar"/>
+            location="/Users/chenjh/workspaces/workspace_1/generator/core/mybatis-generator-core/src/test/resources/driver/mysql-connector-java-5.1.46.jar"/>
     <context id="pageContext" targetRuntime="MyBatis3">
 
         <plugin type="org.mybatis.generator.plugins.RenameExampleClassPlugin">
@@ -46,9 +46,9 @@
         </commentGenerator>
 
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://192.168.5.24:3306/saas_monitor"
+                        connectionURL="jdbc:mysql://192.168.5.241:3306/notifyplus"
                         userId="root"
-                        password="Tianxing@0701">
+                        password="dashu0701">
         </jdbcConnection>
         
         <javaModelGenerator targetPackage="test.entity"
@@ -69,7 +69,7 @@
         </javaClientGenerator>
 
 
-        <table tableName="merchant_stat_day_access" domainObjectName="MerchantStatDayAccess"
+        <!--<table tableName="merchant_stat_day_access" domainObjectName="MerchantStatDayAccess"
                enableSelectPaginationByExample="true"
                enableInsertOrUpdateBySelective="true"
                enableBatchInsert="true"
@@ -77,6 +77,15 @@
                enableBatchUpdateByPrimaryKeySelective="true">
             <property name="useActualColumnNames" value="true"/>
             <generatedKey column="Id" sqlStatement="MySql" identity="true"/>
+        </table>-->
+
+        <table tableName="t_sms_operator" domainObjectName="SmsOperator"
+               enableSelectPaginationByExample="true"
+               enableInsertOrUpdateBySelective="true"
+               enableBatchInsert="true"
+               enableBatchUpdateByPrimaryKey="true"
+               enableBatchUpdateByPrimaryKeySelective="true">
+            <property name="useActualColumnNames" value="false"/>
         </table>
 
     </context>
