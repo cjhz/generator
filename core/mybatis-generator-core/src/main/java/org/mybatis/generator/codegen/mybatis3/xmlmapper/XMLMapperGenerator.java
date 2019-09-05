@@ -1,5 +1,5 @@
 /**
- *    Copyright 2006-2017 the original author or authors.
+ *    Copyright 2006-2019 the original author or authors.
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -74,6 +74,7 @@ public class XMLMapperGenerator extends AbstractXmlGenerator {
         addUpdateByExampleWithBLOBsElement(answer);
         addUpdateByExampleWithoutBLOBsElement(answer);
         addUpdateByPrimaryKeySelectiveElement(answer);
+        addUpdateByPrimaryKeyIncludeNullElement(answer);
         addUpdateByPrimaryKeyWithBLOBsElement(answer);
         addUpdateByPrimaryKeyWithoutBLOBsElement(answer);
 
@@ -250,6 +251,15 @@ public class XMLMapperGenerator extends AbstractXmlGenerator {
             XmlElement parentElement) {
         if (introspectedTable.getRules().generateUpdateByPrimaryKeySelective()) {
             AbstractXmlElementGenerator elementGenerator = new UpdateByPrimaryKeySelectiveElementGenerator();
+            initializeAndExecuteGenerator(elementGenerator, parentElement);
+        }
+    }
+
+
+    protected void addUpdateByPrimaryKeyIncludeNullElement(
+            XmlElement parentElement) {
+        if (introspectedTable.getRules().generateUpdateByPrimaryKeyIncludeNull()) {
+            AbstractXmlElementGenerator elementGenerator = new UpdateByPrimaryKeyIncludeNullElementGenerator();
             initializeAndExecuteGenerator(elementGenerator, parentElement);
         }
     }

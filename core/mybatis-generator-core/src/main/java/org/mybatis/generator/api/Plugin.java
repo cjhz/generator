@@ -1,5 +1,5 @@
 /**
- *    Copyright 2006-2017 the original author or authors.
+ *    Copyright 2006-2019 the original author or authors.
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -632,6 +632,24 @@ public interface Plugin {
                                                              Interface interfaze, IntrospectedTable introspectedTable);
 
     /**
+     * This method is called when the updateByPrimaryKeyIncludeNull method has
+     * been generated in the client interface.
+     *
+     * @param method            the generated updateByPrimaryKeySelective method
+     * @param interfaze         the partially implemented client interface. You can add
+     *                          additional imported classes to the interface if
+     *                          necessary.
+     * @param introspectedTable The class containing information about the table as
+     *                          introspected from the database
+     * @return true if the method should be generated, false if the generated
+     * method should be ignored. In the case of multiple plugins, the
+     * first plugin returning false will disable the calling of further
+     * plugins.
+     */
+    boolean clientUpdateByPrimaryKeyIncludeNullMethodGenerated(Method method,
+                                                             Interface interfaze, IntrospectedTable introspectedTable);
+
+    /**
      * This method is called when the updateByPrimaryKeySelective method has
      * been generated in the client implementation class.
      *
@@ -647,6 +665,24 @@ public interface Plugin {
      * plugins.
      */
     boolean clientUpdateByPrimaryKeySelectiveMethodGenerated(Method method,
+                                                             TopLevelClass topLevelClass, IntrospectedTable introspectedTable);
+
+    /**
+     * This method is called when the updateByPrimaryKeyIncludeNull method has
+     * been generated in the client implementation class.
+     *
+     * @param method            the generated updateByPrimaryKeySelective method
+     * @param topLevelClass     the partially implemented client implementation class. You can
+     *                          add additional imported classes to the implementation class if
+     *                          necessary.
+     * @param introspectedTable The class containing information about the table as
+     *                          introspected from the database
+     * @return true if the method should be generated, false if the generated
+     * method should be ignored. In the case of multiple plugins, the
+     * first plugin returning false will disable the calling of further
+     * plugins.
+     */
+    boolean clientUpdateByPrimaryKeyIncludeNullMethodGenerated(Method method,
                                                              TopLevelClass topLevelClass, IntrospectedTable introspectedTable);
 
     /**
@@ -1224,6 +1260,22 @@ public interface Plugin {
     boolean sqlMapUpdateByPrimaryKeySelectiveElementGenerated(
             XmlElement element, IntrospectedTable introspectedTable);
 
+
+    /**
+     * This method is called when the updateByPrimaryKeyIncludeNull element is
+     * generated.
+     *
+     * @param element           the generated &lt;update&gt; element
+     * @param introspectedTable The class containing information about the table as
+     *                          introspected from the database
+     * @return true if the element should be generated, false if the generated
+     * element should be ignored. In the case of multiple plugins, the
+     * first plugin returning false will disable the calling of further
+     * plugins.
+     */
+    boolean sqlMapUpdateByPrimaryKeyIncludeNullElementGenerated(
+            XmlElement element, IntrospectedTable introspectedTable);
+
     /**
      * This method is called when the updateByPrimaryKeyWithBLOBs element is
      * generated.
@@ -1448,5 +1500,24 @@ public interface Plugin {
      * plugins.
      */
     boolean providerUpdateByPrimaryKeySelectiveMethodGenerated(Method method,
+                                                               TopLevelClass topLevelClass, IntrospectedTable introspectedTable);
+
+
+    /**
+     * This method is called when the updateByPrimaryKeyIncludeNull method has
+     * been generated in the SQL provider.
+     *
+     * @param method            the generated updateByPrimaryKeySelective method
+     * @param topLevelClass     the partially generated provider class
+     *                          You can add additional imported classes to the class
+     *                          if necessary.
+     * @param introspectedTable The class containing information about the table as
+     *                          introspected from the database
+     * @return true if the method should be generated, false if the generated
+     * method should be ignored. In the case of multiple plugins, the
+     * first plugin returning false will disable the calling of further
+     * plugins.
+     */
+    boolean providerUpdateByPrimaryKeyIncludeNullMethodGenerated(Method method,
                                                                TopLevelClass topLevelClass, IntrospectedTable introspectedTable);
 }

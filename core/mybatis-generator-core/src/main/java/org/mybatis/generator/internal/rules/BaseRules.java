@@ -1,5 +1,5 @@
 /**
- *    Copyright 2006-2017 the original author or authors.
+ *    Copyright 2006-2019 the original author or authors.
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -170,6 +170,33 @@ public abstract class BaseRules implements Rules {
         }
 
         boolean rc = tableConfiguration.isUpdateByPrimaryKeyStatementEnabled()
+                && introspectedTable.hasPrimaryKeyColumns()
+                && (introspectedTable.hasBLOBColumns() || introspectedTable
+                .hasBaseColumns());
+
+        return rc;
+    }
+
+
+    /**
+     * Implements the rule for generating the update by primary key selective
+     * SQL Map element and DAO method. If the table has a primary key as well as
+     * other fields, and the updateByPrimaryKey statement is allowed, then
+     * generate the element and method.
+     *
+     * @return true if the element and method should be generated
+     */
+    @Override
+    public boolean generateUpdateByPrimaryKeyIncludeNull() {
+        if (isModelOnly) {
+            return false;
+        }
+
+        if (ListUtilities.removeGeneratedAlwaysColumns(introspectedTable.getNonPrimaryKeyColumns()).isEmpty()) {
+            return false;
+        }
+
+        boolean rc = tableConfiguration.isUpdateByPrimaryKeyIncludeNullEnabled()
                 && introspectedTable.hasPrimaryKeyColumns()
                 && (introspectedTable.hasBLOBColumns() || introspectedTable
                 .hasBaseColumns());

@@ -1,5 +1,5 @@
 /**
- *    Copyright 2006-2017 the original author or authors.
+ *    Copyright 2006-2019 the original author or authors.
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -91,6 +91,7 @@ public class JavaMapperGenerator extends AbstractJavaClientGenerator {
         addUpdateByExampleWithBLOBsMethod(interfaze);
         addUpdateByExampleWithoutBLOBsMethod(interfaze);
         addUpdateByPrimaryKeySelectiveMethod(interfaze);
+        addUpdateByPrimaryKeyIncludeNullMethod(interfaze);
         addUpdateByPrimaryKeyWithBLOBsMethod(interfaze);
         addUpdateByPrimaryKeyWithoutBLOBsMethod(interfaze);
 
@@ -226,6 +227,13 @@ public class JavaMapperGenerator extends AbstractJavaClientGenerator {
     protected void addUpdateByPrimaryKeySelectiveMethod(Interface interfaze) {
         if (introspectedTable.getRules().generateUpdateByPrimaryKeySelective()) {
             AbstractJavaMapperMethodGenerator methodGenerator = new UpdateByPrimaryKeySelectiveMethodGenerator();
+            initializeAndExecuteGenerator(methodGenerator, interfaze);
+        }
+    }
+
+    protected void addUpdateByPrimaryKeyIncludeNullMethod(Interface interfaze) {
+        if (introspectedTable.getRules().generateUpdateByPrimaryKeyIncludeNull()) {
+            AbstractJavaMapperMethodGenerator methodGenerator = new UpdateByPrimaryKeyIncludeNullMethodGenerator();
             initializeAndExecuteGenerator(methodGenerator, interfaze);
         }
     }

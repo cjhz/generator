@@ -1,5 +1,5 @@
 /**
- *    Copyright 2006-2017 the original author or authors.
+ *    Copyright 2006-2019 the original author or authors.
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -251,6 +251,19 @@ public abstract class PluginAdapter implements Plugin {
         return true;
     }
 
+
+    @Override
+    public boolean clientUpdateByPrimaryKeyIncludeNullMethodGenerated(Method method,
+                                                                    Interface interfaze, IntrospectedTable introspectedTable) {
+        return true;
+    }
+
+    @Override
+    public boolean clientUpdateByPrimaryKeyIncludeNullMethodGenerated(Method method,
+                                                                    TopLevelClass topLevelClass, IntrospectedTable introspectedTable) {
+        return true;
+    }
+
     @Override
     public boolean clientUpdateByPrimaryKeyWithBLOBsMethodGenerated(Method method,
             Interface interfaze, IntrospectedTable introspectedTable) {
@@ -448,6 +461,12 @@ public abstract class PluginAdapter implements Plugin {
     }
 
     @Override
+    public boolean sqlMapUpdateByPrimaryKeyIncludeNullElementGenerated(
+            XmlElement element, IntrospectedTable introspectedTable) {
+        return true;
+    }
+
+    @Override
     public boolean sqlMapUpdateByPrimaryKeyWithBLOBsElementGenerated(
             XmlElement element, IntrospectedTable introspectedTable) {
         return true;
@@ -560,6 +579,14 @@ public abstract class PluginAdapter implements Plugin {
 
     @Override
     public boolean providerUpdateByPrimaryKeySelectiveMethodGenerated(
+            Method method, TopLevelClass topLevelClass,
+            IntrospectedTable introspectedTable) {
+        return true;
+    }
+
+
+    @Override
+    public boolean providerUpdateByPrimaryKeyIncludeNullMethodGenerated(
             Method method, TopLevelClass topLevelClass,
             IntrospectedTable introspectedTable) {
         return true;

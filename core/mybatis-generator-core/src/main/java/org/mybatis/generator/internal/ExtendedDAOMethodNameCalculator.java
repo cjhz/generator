@@ -1,5 +1,5 @@
 /**
- *    Copyright 2006-2017 the original author or authors.
+ *    Copyright 2006-2019 the original author or authors.
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -189,6 +189,18 @@ public class ExtendedDAOMethodNameCalculator implements DAOMethodNameCalculator 
         sb.append(introspectedTable.getFullyQualifiedTable()
                 .getDomainObjectName());
         sb.append("ByPrimaryKeySelective"); //$NON-NLS-1$
+
+        return sb.toString();
+    }
+
+    @Override
+    public String getUpdateByPrimaryKeyIncludeNullMethodName(
+            IntrospectedTable introspectedTable) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("update"); //$NON-NLS-1$
+        sb.append(introspectedTable.getFullyQualifiedTable()
+                .getDomainObjectName());
+        sb.append("ByPrimaryKeyIncludeNull"); //$NON-NLS-1$
 
         return sb.toString();
     }

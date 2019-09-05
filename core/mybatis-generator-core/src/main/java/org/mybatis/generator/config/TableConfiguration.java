@@ -1,5 +1,5 @@
 /**
- *    Copyright 2006-2017 the original author or authors.
+ *    Copyright 2006-2019 the original author or authors.
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -55,6 +55,8 @@ public class TableConfiguration extends PropertyHolder {
     private boolean batchUpdateByPrimaryKeySelectiveEnabled;
 
     private boolean updateByPrimaryKeyStatementEnabled;
+
+    private boolean updateByPrimaryKeyIncludeNullEnabled;
 
     private boolean deleteByPrimaryKeyStatementEnabled;
 
@@ -128,6 +130,7 @@ public class TableConfiguration extends PropertyHolder {
         batchUpdateByPrimaryKeyEnabled = false;
         batchUpdateByPrimaryKeySelectiveEnabled = false;
         updateByPrimaryKeyStatementEnabled = true;
+        updateByPrimaryKeyIncludeNullEnabled = true;
         deleteByPrimaryKeyStatementEnabled = true;
         deleteByExampleStatementEnabled = true;
         countByExampleStatementEnabled = true;
@@ -167,6 +170,14 @@ public class TableConfiguration extends PropertyHolder {
     public void setUpdateByPrimaryKeyStatementEnabled(
             boolean updateByPrimaryKeyStatementEnabled) {
         this.updateByPrimaryKeyStatementEnabled = updateByPrimaryKeyStatementEnabled;
+    }
+
+    public boolean isUpdateByPrimaryKeyIncludeNullEnabled() {
+        return updateByPrimaryKeyIncludeNullEnabled;
+    }
+
+    public void setUpdateByPrimaryKeyIncludeNullEnabled(boolean updateByPrimaryKeyIncludeNullEnabled) {
+        this.updateByPrimaryKeyIncludeNullEnabled = updateByPrimaryKeyIncludeNullEnabled;
     }
 
     public boolean isColumnIgnored(String columnName) {
@@ -375,6 +386,7 @@ public class TableConfiguration extends PropertyHolder {
                 || batchUpdateByPrimaryKeySelectiveEnabled
                 || selectByPrimaryKeyStatementEnabled || insertStatementEnabled
                 || updateByPrimaryKeyStatementEnabled
+                || updateByPrimaryKeyIncludeNullEnabled
                 || deleteByExampleStatementEnabled
                 || deleteByPrimaryKeyStatementEnabled
                 || countByExampleStatementEnabled
@@ -532,6 +544,11 @@ public class TableConfiguration extends PropertyHolder {
                     "enableUpdateByPrimaryKey", "false")); //$NON-NLS-1$ //$NON-NLS-2$
         }
 
+        if (!updateByPrimaryKeyIncludeNullEnabled) {
+            xmlElement.addAttribute(new Attribute(
+                    "enableUpdateByPrimaryKeyIncludeNull", "false")); //$NON-NLS-1$ //$NON-NLS-2$
+        }
+
         if (!deleteByPrimaryKeyStatementEnabled) {
             xmlElement.addAttribute(new Attribute(
                     "enableDeleteByPrimaryKey", "false")); //$NON-NLS-1$ //$NON-NLS-2$
@@ -672,7 +689,7 @@ public class TableConfiguration extends PropertyHolder {
                 && batchInsertEnabled
                 && batchUpdateByPrimaryKeyEnabled
                 && batchUpdateByPrimaryKeySelectiveEnabled
-
+                && updateByPrimaryKeyIncludeNullEnabled
                 && selectByPrimaryKeyStatementEnabled) {
             boolean queryId1Set = stringHasValue(selectByExampleQueryId);
             boolean queryId2Set = stringHasValue(selectByPrimaryKeyQueryId);

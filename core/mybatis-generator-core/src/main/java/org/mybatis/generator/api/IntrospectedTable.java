@@ -1,5 +1,5 @@
 /**
- *    Copyright 2006-2017 the original author or authors.
+ *    Copyright 2006-2019 the original author or authors.
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -76,6 +76,8 @@ public abstract class IntrospectedTable {
         ATTR_UPDATE_BY_EXAMPLE_WITH_BLOBS_STATEMENT_ID,
         ATTR_UPDATE_BY_PRIMARY_KEY_STATEMENT_ID,
         ATTR_UPDATE_BY_PRIMARY_KEY_SELECTIVE_STATEMENT_ID,
+        //updateByPrimaryKeyIncludeNull
+        ATTR_UPDATE_BY_PRIMARY_KEY_INCLUDENULL_STATEMENT_ID,
         ATTR_UPDATE_BY_PRIMARY_KEY_WITH_BLOBS_STATEMENT_ID,
         ATTR_BASE_RESULT_MAP_ID,
         ATTR_RESULT_MAP_WITH_BLOBS_ID,
@@ -569,6 +571,7 @@ public abstract class IntrospectedTable {
         setUpdateByExampleWithBLOBsStatementId("updateByExampleWithBLOBs"); //$NON-NLS-1$
         setUpdateByPrimaryKeyStatementId("updateByPrimaryKey"); //$NON-NLS-1$
         setUpdateByPrimaryKeySelectiveStatementId("updateByPrimaryKeySelective"); //$NON-NLS-1$
+        setUpdateByPrimaryKeyIncludeNullStatementId("updateByPrimaryKeyIncludeNull"); //$NON-NLS-1$
         setUpdateByPrimaryKeyWithBLOBsStatementId("updateByPrimaryKeyWithBLOBs"); //$NON-NLS-1$
         setBaseResultMapId("BaseResultMap"); //$NON-NLS-1$
         setResultMapWithBLOBsId("ResultMapWithBLOBs"); //$NON-NLS-1$
@@ -616,6 +619,13 @@ public abstract class IntrospectedTable {
         internalAttributes
                 .put(
                         InternalAttribute.ATTR_UPDATE_BY_PRIMARY_KEY_SELECTIVE_STATEMENT_ID,
+                        s);
+    }
+
+    public void setUpdateByPrimaryKeyIncludeNullStatementId(String s) {
+        internalAttributes
+                .put(
+                        InternalAttribute.ATTR_UPDATE_BY_PRIMARY_KEY_INCLUDENULL_STATEMENT_ID,
                         s);
     }
 
@@ -746,6 +756,11 @@ public abstract class IntrospectedTable {
     public String getUpdateByPrimaryKeySelectiveStatementId() {
         return internalAttributes
                 .get(InternalAttribute.ATTR_UPDATE_BY_PRIMARY_KEY_SELECTIVE_STATEMENT_ID);
+    }
+
+    public String getUpdateByPrimaryKeyIncludeNullStatementId() {
+        return internalAttributes
+                .get(InternalAttribute.ATTR_UPDATE_BY_PRIMARY_KEY_INCLUDENULL_STATEMENT_ID);
     }
 
     public String getUpdateByPrimaryKeyStatementId() {

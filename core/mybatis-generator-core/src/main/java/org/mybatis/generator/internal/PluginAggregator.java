@@ -1,5 +1,5 @@
 /**
- *    Copyright 2006-2017 the original author or authors.
+ *    Copyright 2006-2019 the original author or authors.
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -488,6 +488,23 @@ public final class PluginAggregator implements Plugin {
 
         for (Plugin plugin : plugins) {
             if (!plugin.sqlMapUpdateByPrimaryKeySelectiveElementGenerated(
+                    element, introspectedTable)) {
+                rc = false;
+                break;
+            }
+        }
+
+        return rc;
+    }
+
+
+    @Override
+    public boolean sqlMapUpdateByPrimaryKeyIncludeNullElementGenerated(
+            XmlElement element, IntrospectedTable introspectedTable) {
+        boolean rc = true;
+
+        for (Plugin plugin : plugins) {
+            if (!plugin.sqlMapUpdateByPrimaryKeyIncludeNullElementGenerated(
                     element, introspectedTable)) {
                 rc = false;
                 break;
@@ -988,6 +1005,23 @@ public final class PluginAggregator implements Plugin {
         return rc;
     }
 
+
+    @Override
+    public boolean clientUpdateByPrimaryKeyIncludeNullMethodGenerated(Method method,
+                                                                    Interface interfaze, IntrospectedTable introspectedTable) {
+        boolean rc = true;
+
+        for (Plugin plugin : plugins) {
+            if (!plugin.clientUpdateByPrimaryKeyIncludeNullMethodGenerated(method,
+                    interfaze, introspectedTable)) {
+                rc = false;
+                break;
+            }
+        }
+
+        return rc;
+    }
+
     @Override
     public boolean clientUpdateByPrimaryKeySelectiveMethodGenerated(Method method,
             TopLevelClass topLevelClass, IntrospectedTable introspectedTable) {
@@ -995,6 +1029,22 @@ public final class PluginAggregator implements Plugin {
 
         for (Plugin plugin : plugins) {
             if (!plugin.clientUpdateByPrimaryKeySelectiveMethodGenerated(method,
+                    topLevelClass, introspectedTable)) {
+                rc = false;
+                break;
+            }
+        }
+
+        return rc;
+    }
+
+    @Override
+    public boolean clientUpdateByPrimaryKeyIncludeNullMethodGenerated(Method method,
+                                                                    TopLevelClass topLevelClass, IntrospectedTable introspectedTable) {
+        boolean rc = true;
+
+        for (Plugin plugin : plugins) {
+            if (!plugin.clientUpdateByPrimaryKeyIncludeNullMethodGenerated(method,
                     topLevelClass, introspectedTable)) {
                 rc = false;
                 break;
@@ -1398,6 +1448,24 @@ public final class PluginAggregator implements Plugin {
 
         for (Plugin plugin : plugins) {
             if (!plugin.providerUpdateByPrimaryKeySelectiveMethodGenerated(method,
+                    topLevelClass, introspectedTable)) {
+                rc = false;
+                break;
+            }
+        }
+
+        return rc;
+    }
+
+
+    @Override
+    public boolean providerUpdateByPrimaryKeyIncludeNullMethodGenerated(
+            Method method, TopLevelClass topLevelClass,
+            IntrospectedTable introspectedTable) {
+        boolean rc = true;
+
+        for (Plugin plugin : plugins) {
+            if (!plugin.providerUpdateByPrimaryKeyIncludeNullMethodGenerated(method,
                     topLevelClass, introspectedTable)) {
                 rc = false;
                 break;
